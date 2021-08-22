@@ -1,0 +1,23 @@
+imageCredentials:
+  enabled: false
+app:
+  name: lab1
+  namespace: default
+  image: sgmakarov/devops:lab1
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+      cert-manager.io/cluster-issuer: "letsencrypt"
+    hosts:
+      - host: lab1.devops.sgmakarov.ru
+        paths:
+          - path: /
+    tls:
+      - secretName: lab1-tls
+        hosts:
+          - lab1.devops.sgmakarov.ru
+
+replicas: 1
+containerPort: 5000
+targetPort: 5000

@@ -7,3 +7,4 @@
 * Apk dependency versions are fixed
 * Application port is exposed
 * Runs perfectly in any timezone
+* Can be deployed via provided helm chart
