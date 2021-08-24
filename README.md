@@ -1,8 +1,6 @@
 
 # F21 DevOps homeworks
 
-[toc]
-
 ## About The Project
 
 ### Project structure
@@ -15,6 +13,11 @@
 │   ├── example.env
 │   ├── PYTHON.md
 │   └── requirements.txt
+├── helm
+│   ├── .helmignore
+│   ├── Chart.yaml
+│   ├── values.yaml
+│   ├── templates (folder)
 └── README.md
 ```
 
@@ -73,4 +76,10 @@ By default, `Europe/Moscow` is used. However, this can be changed:
 ```sh
 # provide custom timezone via environment variable
 docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000 -e TZ='US/Central' sgmakarov/devops:lab1
+```
+### Running with helm
+
+Another option is to run it with helm. Just set values you want to change in `helm/values.yaml` and run
+```sh
+helm upgrade --install <Release name> [-n <namespace>] helm/
 ```
