@@ -9,15 +9,23 @@
 ├── app_python
 │   ├── app.py
 │   ├── Dockerfile
+│   ├── Dockerfile.test
 │   ├── DOCKER.md
 │   ├── example.env
 │   ├── PYTHON.md
-│   └── requirements.txt
+│   ├── requirements.test.txt
+│   ├── requirements.txt
+│   └── test_app.py
 ├── helm
-│   ├── .helmignore
 │   ├── Chart.yaml
-│   ├── values.yaml
-│   ├── templates (folder)
+│   ├── templates
+│   │   ├── deployment.yaml
+│   │   ├── imagePullSecret.yaml
+│   │   ├── ingress.yaml
+│   │   ├── NOTES.txt
+│   │   ├── secrets.yaml
+│   │   └── service.yaml
+│   └── values.yaml
 └── README.md
 ```
 
