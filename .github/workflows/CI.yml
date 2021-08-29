@@ -23,11 +23,11 @@ jobs:
           push: false
           context: app_python/
           file: Dockerfile.test
-          tags: test:${GITHUB_SHA}
+          tags: "test:${GITHUB_SHA::6}"
       -
         name: Run tests
         run: |
-          docker run test:${GITHUB_SHA}
+          docker run "test:${GITHUB_SHA::6}"
   docker:
     runs-on: ubuntu-latest
     steps:
@@ -50,4 +50,4 @@ jobs:
         with:
           push: true
           context: app_python/
-          tags: sgmakarov/devops:${GITHUB_SHA},sgmakarov/devops:latest
+          tags: "sgmakarov/devops:${GITHUB_SHA::6},sgmakarov/devops:latest"
