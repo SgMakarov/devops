@@ -77,9 +77,17 @@ By default, `Europe/Moscow` is used. However, this can be changed:
 # provide custom timezone via environment variable
 docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000 -e TZ='US/Central' sgmakarov/devops:lab1
 ```
+
 ### Running with helm
 
-Another option is to run it with helm. Just set values you want to change in `helm/values.yaml` and run
+Another option is to run it with helm. Just set values you want to change in `helm/values.yaml`
+   and run
+
 ```sh
 helm upgrade --install <Release name> [-n <namespace>] helm/
 ```
+
+## Unit tests
+
+To run unit tests, you need to either run `pytest` locally (with installed `requirements.test.txt`)
+   or simply build a test docker image via `Dockerfile.test`

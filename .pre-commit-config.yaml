@@ -21,4 +21,4 @@ repos:
     rev: v2.5.0
     hooks:
       - id: hadolint-docker
-        files: (Dockerfile|DOCKERFILE)$
+        files: (Dockerfile|DOCKERFILE|Dockerfile.test)$
