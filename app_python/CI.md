@@ -9,3 +9,6 @@
 1. No need to lint, as precommit is used and we
     do not expect unlinted code to be pushed
 1. Secrets handled by github
+1. Use github token for Jenkins that will expire after course ends
+1. Same for dockerhub
+1. Use modules in actions and Jenkins rather than pure bash

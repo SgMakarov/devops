@@ -1,18 +1,22 @@
 pipeline {
   agent any
   stages {
-    stage('Test') {
+    stage('Build test image') {
       steps {
-        echo 'Testing..'
-        sh '''
-          echo "Building test image..."
-          docker build -t test:latest -f app_python/Dockerfile.test app_python/
-          echo "Runnint tests..."
-          docker run test:latest
-          '''
+        echo "Building test image..."
+        script {
+            testImage = docker.build("test", '-t latest -f ./app_python/Dockerfile.test ./app_python')
+        }
       }
     }
-
+    stage('Run tests') {
+      steps {
+        sh '''
+            echo "Running tests..."
+            docker run "test:latest"
+           '''
+      }
+    }
     stage('Build') {
       steps {
         echo 'Building..'

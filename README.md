@@ -8,6 +8,7 @@
 ```
 ├── app_python
 │   ├── app.py
+│   ├── CI.md
 │   ├── Dockerfile
 │   ├── Dockerfile.test
 │   ├── DOCKER.md
@@ -26,6 +27,7 @@
 │   │   ├── secrets.yaml
 │   │   └── service.yaml
 │   └── values.yaml
+├── Jenkinsfile
 └── README.md
 ```
 
@@ -101,3 +103,25 @@ helm upgrade --install <Release name> [-n <namespace>] helm/
 
 To run unit tests, you need to either run `pytest` locally (with installed `requirements.test.txt`)
    or simply build a test docker image via `Dockerfile.test`
+
+## CI
+
+### Github Actions
+
+It just works, you may take a look on them in `.github/workflows/CI.yaml`
+
+### Jenkins
+
+To run a pipeline you will need to:
+
+1. Run jenkins with
+
+   ```sh
+   docker run --rm --name jenkins -p 8080:8080 -p 50000:50000 -u 0 -v \
+   pwd:/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock \
+   jenkinsci/blueocean
+   ```
+
+1. Install Docker plugin
+1. Set up credentials for github and dockerhub in settings
+1. Run a pipeline
