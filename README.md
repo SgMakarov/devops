@@ -125,3 +125,6 @@ To run a pipeline you will need to:
 1. Install Docker plugin
 1. Set up credentials for github and dockerhub in settings
 1. Run a pipeline
+1. Get result
+
+![](https://i.imgur.com/iZ3pZcw.png)
