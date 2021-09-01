@@ -61,14 +61,14 @@ The application runs in a docker container.
 1. Pull the docker image
 
    ```sh
-   docker pull sgmakarov/devops:lab1
+   docker pull sgmakarov/devops:latest
    ```
 
 1. Run it with
 
    ```sh
    # without --cap-add chrony will not be allowed to set time inside container
-   docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000  sgmakarov/devops:lab1
+   docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000  sgmakarov/devops:latest
    ```
 
 1. Go to [localhost](http://localhost:5000/)
@@ -87,7 +87,7 @@ By default, `Europe/Moscow` is used. However, this can be changed:
 
 ```sh
 # provide custom timezone via environment variable
-docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000 -e TZ='US/Central' sgmakarov/devops:lab1
+docker run -d --cap-add SYS_TIME -p 127.0.0.1:5000:5000 -e TZ='US/Central' sgmakarov/devops:latest
 ```
 
 ### Running with helm
