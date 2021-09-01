@@ -32,6 +32,7 @@
 ### Project description
 
 [![Test and build](https://github.com/SgMakarov/devops/actions/workflows/CI.yml/badge.svg)](https://github.com/SgMakarov/devops/actions/workflows/CI.yml)
+
 This is a simple python app that returns UTC time and local time
 (Moscow by default, but can be changed).
 It is built on top of lightweight [Chrony](https://git.tuxfamily.org/chrony/chrony.git/tree/)

@@ -18,6 +18,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           context: ./app_python/
           file: ./app_python/Dockerfile.test
           load: true
@@ -53,6 +55,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           context: ./app_python/
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
