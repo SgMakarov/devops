@@ -28,7 +28,22 @@
 │   │   └── service.yaml
 │   └── values.yaml
 ├── Jenkinsfile
-└── README.md
+├── README.md
+├── terraform
+│   ├── app.tf
+│   ├── instance_mgr.tf
+│   ├── provider.tf
+│   ├── pub_keys
+│   │   └── sgmakarov.pub
+│   ├── README.md
+│   ├── terraform-gke-keyfile.json
+│   ├── terraform.tfstate
+│   ├── terraform.tfstate.backup
+│   ├── terraform.tfvars
+│   ├── TF.md
+│   └── variables.tf
+└── vagrant
+    └── Vagrantfile
 ```
 
 ### Project description
@@ -128,3 +143,17 @@ To run a pipeline you will need to:
 1. Get result
 
 ![](https://i.imgur.com/iZ3pZcw.png)
+
+## Infrastructure as a code
+
+### Local testing
+
+For local usage we have Vagrant. Just run `vagrant up` in `vagrant` folder,
+I have set up a simple VM. Vagrant can automatically provision ansible playbooks
+on this VM, which will be useful later.
+
+### VPC provider
+
+For VPC management we will use terraform.
+
+The detailed usage will be covered in `terraform/README.md`.
