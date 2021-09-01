@@ -6,7 +6,7 @@ pipeline {
         echo 'Testing..'
         sh '''
           echo "Building test image..."
-          docker build -t test:latest -f app_python/Dockerfile.test
+          docker build -t test:latest -f app_python/Dockerfile.test app_python/
           echo "Runnint tests..."
           docker run test:latest
           '''
