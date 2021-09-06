@@ -6,6 +6,25 @@
 ### Project structure
 
 ```
+├── ansible
+│   ├── application
+│   │   ├── app.yml
+│   │   ├── docker-compose.app.yml
+│   │   ├── README.md
+│   │   ├── requirements.yml
+│   │   └── Vagrantfile
+│   ├── docker
+│   │   ├── docker-compose.proxy.yml
+│   │   ├── docker.yml
+│   │   ├── README.md
+│   │   ├── requirements.yml
+│   │   └── Vagrantfile
+│   └── inventory
+│       ├── ansible-gce-keyfile.json
+│       ├── inventory.gcp.yml
+│       ├── README.md
+│       ├── requirements.txt
+│       └── requirements.yml
 ├── app_python
 │   ├── app.py
 │   ├── CI.md
@@ -30,18 +49,17 @@
 ├── Jenkinsfile
 ├── README.md
 ├── terraform
+│   ├── ansible-gce-keyfile.json
+│   ├── ansible-sa.tf
 │   ├── app.tf
-│   ├── instance_mgr.tf
 │   ├── provider.tf
 │   ├── pub_keys
 │   │   └── sgmakarov.pub
 │   ├── README.md
 │   ├── terraform-gke-keyfile.json
-│   ├── terraform.tfstate
-│   ├── terraform.tfstate.backup
-│   ├── terraform.tfvars
 │   ├── TF.md
-│   └── variables.tf
+│   ├── variables.tf
+│   └── vms-mgr-sa.tf
 └── vagrant
     └── Vagrantfile
 ```
@@ -157,3 +175,17 @@ on this VM, which will be useful later.
 For VPC management we will use terraform.
 
 The detailed usage will be covered in `terraform/README.md`.
+
+### Ansible
+
+General workflow with ansible is the following:
+
+1. Obtain the key with the command provided in ansible inventory `README.md`
+
+1. Run docker playbook
+
+```sh
+ansible-playbook -i inventory/inventory.gcp.yml -u serveruser docker/docker.yml
+```
+
+1. Run application playbook with similar command
