@@ -1,0 +1,37 @@
+---
+- hosts: label_docker_true
+  name: "Install docker on machine"
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
+
+    pip_install_packages:
+      - name: docker
+      - name: docker-compose
+  roles:
+    - geerlingguy.pip
+    - geerlingguy.docker
+  pre_tasks:
+    - name: "Install python dependencies"
+      apt:
+        name:
+          - "python3.7"
+          - "python3-pip"
+        state: present
+        update_cache: true
+  post_tasks:
+    - name: Create traefik directory
+      file:
+        path: /opt/traefik
+        state: directory
+        mode: 0755
+
+    - name: "Copy traefik compose file"
+      copy:
+        src: docker-compose.proxy.yml
+        dest: /opt/traefik/docker-compose.proxy.yml
+
+    - name: "Run traefik"
+      community.docker.docker_compose:
+        project_src: /opt/traefik/
+        files: docker-compose.proxy.yml

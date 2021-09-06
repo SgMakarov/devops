@@ -10,6 +10,7 @@ resource "google_compute_instance" "application_production" {
   labels = {
     "environment" = "production"
     "service" = "application"
+    "docker" = "true"
   }
 
   boot_disk {
