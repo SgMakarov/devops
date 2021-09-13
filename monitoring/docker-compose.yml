@@ -1,0 +1,88 @@
+
+version: '3.8'
+
+services:
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - monitoring
+    restart: always
+
+  postgres:
+    image: postgres:13.1
+    env_file: .env
+    volumes:
+      - postgres:/var/lib/postgresql
+    networks:
+      - monitoring
+    restart: always
+
+  promtail:
+    image: grafana/promtail:2.3.0
+    volumes:
+      - /var/lib/docker:/var/lib/docker:ro
+      - ./promtail.yml:/etc/promtail/config.yml:ro
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - monitoring
+    restart: always
+
+  grafana:
+    image: grafana/grafana:8.1.3-ubuntu
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    environment:
+      - GF_DATABASE_URL:postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    restart: always
+
+  vmagent:
+    container_name: vmagent
+    image: victoriametrics/vmagent
+    depends_on:
+      - "victoriametrics"
+    ports:
+      - 8429:8429
+    volumes:
+      - vmagentdata:/vmagentdata
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--promscrape.config=/etc/prometheus/prometheus.yml'
+      - '--remoteWrite.url=http://victoriametrics:8428/api/v1/write'
+    networks:
+      - monitoring
+    restart: always
+
+  victoriametrics:
+    container_name: victoriametrics
+    image: victoriametrics/victoria-metrics
+    ports:
+      - 8428:8428
+      - 8089:8089
+      - 8089:8089/udp
+      - 2003:2003
+      - 2003:2003/udp
+      - 4242:4242
+    volumes:
+      - vmdata:/storage
+    command:
+      - '--storageDataPath=/storage'
+      - '--graphiteListenAddr=:2003'
+      - '--opentsdbListenAddr=:4242'
+      - '--httpListenAddr=:8428'
+      - '--influxListenAddr=:8089'
+    networks:
+      - monitoring
+    restart: always
+
+networks:
+  monitoring:
+
+volumes:
+  postgres: {}
+  vmagentdata: {}
+  vmdata: {}
