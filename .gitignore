@@ -59,7 +59,8 @@ temp
 ### Google inventory service acclount ###
 ansible-gce-keyfile.json
 
-
+# docker secrets
+*.secret
 
 # Editors
 .vscode/

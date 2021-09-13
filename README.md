@@ -8,60 +8,17 @@
 ```
 ├── ansible
 │   ├── application
-│   │   ├── app.yml
-│   │   ├── docker-compose.app.yml
-│   │   ├── README.md
-│   │   ├── requirements.yml
-│   │   └── Vagrantfile
 │   ├── docker
-│   │   ├── docker-compose.proxy.yml
-│   │   ├── docker.yml
-│   │   ├── README.md
-│   │   ├── requirements.yml
-│   │   └── Vagrantfile
 │   └── inventory
-│       ├── ansible-gce-keyfile.json
-│       ├── inventory.gcp.yml
-│       ├── README.md
-│       ├── requirements.txt
-│       └── requirements.yml
 ├── app_python
-│   ├── app.py
-│   ├── CI.md
-│   ├── Dockerfile
-│   ├── Dockerfile.test
-│   ├── DOCKER.md
-│   ├── example.env
-│   ├── PYTHON.md
-│   ├── requirements.test.txt
-│   ├── requirements.txt
-│   └── test_app.py
 ├── helm
-│   ├── Chart.yaml
-│   ├── templates
-│   │   ├── deployment.yaml
-│   │   ├── imagePullSecret.yaml
-│   │   ├── ingress.yaml
-│   │   ├── NOTES.txt
-│   │   ├── secrets.yaml
-│   │   └── service.yaml
-│   └── values.yaml
-├── Jenkinsfile
-├── README.md
+│   └── templates
+├── monitoring
+│   ├── screenshots
+│   └── secrets
 ├── terraform
-│   ├── ansible-gce-keyfile.json
-│   ├── ansible-sa.tf
-│   ├── app.tf
-│   ├── provider.tf
-│   ├── pub_keys
-│   │   └── sgmakarov.pub
-│   ├── README.md
-│   ├── terraform-gke-keyfile.json
-│   ├── TF.md
-│   ├── variables.tf
-│   └── vms-mgr-sa.tf
+│   └── pub_keys
 └── vagrant
-    └── Vagrantfile
 ```
 
 ### Project description

@@ -37,7 +37,11 @@ services:
     networks:
       - monitoring
     environment:
-      - GF_DATABASE_URL:postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/grafana_admin_pass
+      - GF_DATABASE_URL__FILE=/run/secrets/grafana_db_url
+    secrets:
+      - grafana_admin_pass
+      - grafana_db_url
     restart: always
 
   vmagent:
@@ -81,7 +85,11 @@ services:
 
 networks:
   monitoring:
-
+secrets:
+   grafana_admin_pass:
+     file: secrets/grafana_admin_pass.secret
+   grafana_db_url:
+     file: secrets/grafana_db_url.secret
 volumes:
   postgres: {}
   vmagentdata: {}

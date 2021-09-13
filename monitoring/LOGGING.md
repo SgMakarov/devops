@@ -27,6 +27,7 @@ Configured dashboards
 
 1. Save Grafana state postgresql (currently in the same docker-compose,
     but can be easilly replaced with remote
+1. Grafana is configured via docker secrets (see [url](https://grafana.com/docs/grafana/latest/administration/configure-docker/#configure-grafana-with-docker-secrets))
 1. Tags in promtail.
 1. Ensure that log levels are correctly parsed.
 1. Configure log file rotation.
