@@ -1,0 +1,15 @@
+---
+# Source: lab1/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app
+  labels:
+    app.kubernetes.io/component: python-app
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5000
+    targetPort: 5000
+  selector:
+    app.kubernetes.io/component: python-app

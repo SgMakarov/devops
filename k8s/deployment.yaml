@@ -1,0 +1,29 @@
+---
+# Source: lab1/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: python-app
+  name: python-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: python-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: python-app
+    spec:
+
+      containers:
+        - image: sgmakarov/devops:latest
+          name: python-app
+          ports:
+            - name: yolocat
+              containerPort: 5000
+              protocol: TCP
+          securityContext:
+            capabilities:
+              add: [SYS_TIME]

@@ -13,6 +13,7 @@
 ├── app_python
 ├── helm
 │   └── templates
+├── k8s
 ├── monitoring
 │   ├── screenshots
 │   └── secrets
