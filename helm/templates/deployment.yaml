@@ -25,6 +25,22 @@ spec:
           securityContext:
             capabilities:
               add: [SYS_TIME]
+          resources:
+            {{- toYaml .Values.app.resources | nindent 12 }}
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.app.name }}-environment
+                  key: password
+          volumeMounts:
+            - name: {{ .Values.app.name }}-config-mount
+              mountPath: /app/config.json
+              subPath: config.json
+      volumes:
+        - name: {{ .Values.app.name }}-config-mount
+          configMap:
+            name: {{ .Values.app.name }}-config
 {{- if .Values.imageCredentials.enabled -}}
       imagePullSecrets:
         - name: {{ .Values.imageCredentials.name }}

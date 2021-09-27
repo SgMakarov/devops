@@ -17,7 +17,16 @@ app:
       - secretName: lab1-tls
         hosts:
           - lab1.devops.sgmakarov.ru
+  resources:
+   requests:
+     cpu: 1
+     memory: 256Mi
+   limits:
+     cpu: 1.5
+     memory: 512Mi
 
+  env:
+    password: kek
 replicas: 3
 containerPort: 5000
 targetPort: 5000

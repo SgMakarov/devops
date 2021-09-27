@@ -3,6 +3,8 @@ version: "3.3"
 services:
   app:
     image: sgmakarov/devops:latest
+    build:
+      context: app_python
     container_name: application
     restart: unless-stopped
     labels:
@@ -11,23 +13,5 @@ services:
       - "traefik.http.routers.application.entrypoints=websecure"
       - "traefik.http.routers.application.tls.certresolver=letsencrypt"
       - "traefik.http.services.application.loadbalancer.server.port=5000"
-    networks:
-      - web
-    logging:
-      driver: "json-file"
-      options:
-        tag: "{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}"
-        max-size: "200k"
-        max-file: "10"
-    deploy:
-      resources:
-        limits:
-          cpus: '0.2'
-          memory: 100m
-        reservations:
-          cpus: '0.05'
-          memory: 50m
-
-networks:
-  web:
-    external: true
+    ports:
+      - 5000:5000
