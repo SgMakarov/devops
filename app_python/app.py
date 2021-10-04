@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 timezone = pytz.timezone(os.environ.get('TZ', 'Europe/Moscow'))
 
-path = os.path.join(os.environ.get('DATA_DIR', '/data/'), 'output.txt')
+path = os.path.join(os.environ.get('DATA_DIR', '/'), 'output.txt')
 
 
 @app.route("/")

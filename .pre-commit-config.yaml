@@ -10,13 +10,13 @@ repos:
     rev: 3.9.2
     hooks:
       - id: flake8
-  - repo: https://github.com/markdownlint/markdownlint
-    rev: v0.11.0
-    hooks:
-      - id: markdownlint
-        language: docker_image
-        files: \.(md|mdown|markdown)$
-        entry: markdownlint/markdownlint
+  # - repo: https://github.com/markdownlint/markdownlint
+  #   rev: v0.11.0
+  #   hooks:
+  #     - id: markdownlint
+  #       language: docker_image
+  #       files: \.(md|mdown|markdown)$
+  #       entry: markdownlint/markdownlint
   - repo: https://github.com/hadolint/hadolint
     rev: v2.5.0
     hooks:

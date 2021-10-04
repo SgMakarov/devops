@@ -37,12 +37,20 @@ spec:
                   name: {{ .Values.app.name }}-environment
                   key: password
           volumeMounts:
-            - name: {{ .Values.app.name }}-config-mount
-              mountPath: /app/config.json
-              subPath: config.json
-          volumeMounts:
             - name: {{ .Values.app.name }}-visited-mount
-              mountPath: {{ .Values.app.datadir }} 
+              mountPath: {{ .Values.app.datadir }}
+            - name: {{ .Values.app.name }}-init-mount
+              mountPath: /app/init/
+      initContainers:
+        - name: init-{{ .Values.app.name }}
+          image: busybox:1.28
+          command: ['sh', '-c', "wget example.com -P /app/init/"]
+          volumeMounts:
+            - name: {{ .Values.app.name }}-init-mount
+              mountPath: /app/init/
+      volumes:
+        - name: {{ .Values.app.name }}-init-mount
+          emptyDir: {}
   volumeClaimTemplates:
     - metadata:
         name: {{ .Values.app.name }}-visited-mount
