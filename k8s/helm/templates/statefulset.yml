@@ -1,11 +1,13 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   labels:
     app.kubernetes.io/component: {{ .Values.app.name }}
   name: {{ .Values.app.name }}
 spec:
+  serviceName: {{ .Values.app.name }}
   replicas: {{ .Values.replicas }}
+  podManagementPolicy: Parallel
   selector:
     matchLabels:
       app.kubernetes.io/component: {{ .Values.app.name }}
@@ -14,7 +16,6 @@ spec:
       labels:
         app.kubernetes.io/component: {{ .Values.app.name }}
     spec:
-
       containers:
         - image: {{ .Values.app.image }}
           name: {{ .Values.app.name }}
@@ -28,6 +29,8 @@ spec:
           resources:
             {{- toYaml .Values.app.resources | nindent 12 }}
           env:
+            - name: DATA_DIR
+              value: {{ .Values.app.datadir }}
             - name: PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -37,10 +40,18 @@ spec:
             - name: {{ .Values.app.name }}-config-mount
               mountPath: /app/config.json
               subPath: config.json
-      volumes:
-        - name: {{ .Values.app.name }}-config-mount
-          configMap:
-            name: {{ .Values.app.name }}-config
+          volumeMounts:
+            - name: {{ .Values.app.name }}-visited-mount
+              mountPath: {{ .Values.app.datadir }} 
+  volumeClaimTemplates:
+    - metadata:
+        name: {{ .Values.app.name }}-visited-mount
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 1Gi
+
 {{- if .Values.imageCredentials.enabled -}}
       imagePullSecrets:
         - name: {{ .Values.imageCredentials.name }}

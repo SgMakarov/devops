@@ -17,6 +17,7 @@ app:
       - secretName: lab1-tls
         hosts:
           - lab1.devops.sgmakarov.ru
+  datadir: /data/
   resources:
    requests:
      cpu: 1
